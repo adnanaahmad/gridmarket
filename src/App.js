@@ -7,6 +7,7 @@ import Violinplot from './components/violinplot';
 import Piechart from './components/piechart';
 import HeatMapVisx from './visx/components/heatmap';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
+import ViolinplotVisx from './visx/components/violinplot';
 
 
 function App() {
@@ -50,10 +51,12 @@ function App() {
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>
         Visx Charts
       </div>
-      <div style={{height: 500, width: 600}}>
+      <div style={{height: 500, width: 600, marginBottom: '100px'}}>
         <ParentSize>{({ width, height }) => <HeatMapVisx width={width} height={height} />}</ParentSize>
       </div>
-
+      <div style={{marginBottom: '100px', height: 500}}>
+        <ParentSize>{({ width, height }) => <ViolinplotVisx width={width} height={height} />}</ParentSize>
+      </div>
     </div>
   );
 }
