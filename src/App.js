@@ -9,6 +9,7 @@ import HeatMapVisx from './visx/components/heatmap';
 import ParentSize from '@visx/responsive/lib/components/ParentSize';
 import ViolinplotVisx from './visx/components/violinplot';
 import BoxplotVisx from './visx/components/boxplot';
+import LineplotVisx from './visx/components/lineplot';
 
 
 function App() {
@@ -60,10 +61,13 @@ function App() {
       <div style={{marginBottom: '100px', height: 500}}>
         <ParentSize>{({ width, height }) => <ViolinplotVisx width={width} height={height} />}</ParentSize>
       </div>
-
-
-
+      <div style={{marginBottom: '100px', height: 500}}>
+        <ParentSize>{({ width, height }) => <LineplotVisx width={width} height={height} />}</ParentSize>
+      </div>
       
+
+
+
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>
         Mock Data Example
       </div>
