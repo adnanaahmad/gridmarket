@@ -3,16 +3,16 @@ import { Group } from '@visx/group';
 import { ViolinPlot } from '@visx/stats';
 import { LinearGradient } from '@visx/gradient';
 import { scaleBand, scaleLinear } from '@visx/scale';
-import genStats, { Stats } from '@visx/mock-data/lib/generators/genStats';
-import { getSeededRandom, getRandomNormal } from '@visx/mock-data';
+import  { Stats } from '@visx/mock-data/lib/generators/genStats';
+//import { getSeededRandom, getRandomNormal } from '@visx/mock-data';
 import { Tooltip, defaultStyles as defaultTooltipStyles } from '@visx/tooltip';
 import { PatternLines } from '@visx/pattern';
 import leftData from '../data/group_one.json';
 import rightData from '../data/group_two.json';
 
 // seeded randomness
-const seededRandom = getSeededRandom(0.1);
-const randomNormal = getRandomNormal.source(getSeededRandom(0.789))(4, 3);
+//const seededRandom = getSeededRandom(0.1);
+//const randomNormal = getRandomNormal.source(getSeededRandom(0.789))(4, 3);
 //const data = genStats(5, randomNormal, () => 10 * seededRandom());
 
 // accessors
