@@ -49,7 +49,8 @@ function App() {
       <div style={{ marginBottom: '100px'}}>
         <Piechart/>
       </div>
-      <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>
+      <div style={{width: '100%', border: '1px solid', marginBottom: 100}}></div>
+      <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'xx-large'}}>
         Visx Charts
       </div>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Real Data Examples</div>
@@ -59,6 +60,10 @@ function App() {
       <div style={{marginBottom: '100px', height: 500}}>
         <ParentSize>{({ width, height }) => <ViolinplotVisx width={width} height={height} />}</ParentSize>
       </div>
+
+
+
+      
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>
         Mock Data Example
       </div>
