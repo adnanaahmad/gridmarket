@@ -50,7 +50,7 @@ function App() {
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>
         Visx Charts
       </div>
-      <div style={{height: 600, width: 600}}>
+      <div style={{height: 500, width: 600}}>
         <ParentSize>{({ width, height }) => <HeatMapVisx width={width} height={height} />}</ParentSize>
       </div>
 
