@@ -5,10 +5,13 @@ import ScatterPlot from './components/scatterplot';
 import BoxplotExample from './components/boxPlot';
 import Violinplot from './components/violinplot';
 import Piechart from './components/piechart';
+import HeatMapVisx from './visx/components/heatmap';
+import ParentSize from '@visx/responsive/lib/components/ParentSize';
+
 
 function App() {
   return (
-    <div style={{padding: 5}}>
+    <div style={{padding: 5, height: '100%'}}>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Real Data Examples</div>
       <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
         <div style={{margin: 'auto'}}>Latitude</div>
@@ -41,8 +44,14 @@ function App() {
       <div style={{ marginBottom: '100px'}}>
         <Violinplot/>
       </div>
-      <div>
+      <div style={{ marginBottom: '100px'}}>
         <Piechart/>
+      </div>
+      <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>
+        Visx Charts
+      </div>
+      <div style={{height: 600, width: 600}}>
+        <ParentSize>{({ width, height }) => <HeatMapVisx width={width} height={height} />}</ParentSize>
       </div>
 
     </div>
