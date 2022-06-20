@@ -1,11 +1,20 @@
 import React from 'react';
 import { Group } from '@visx/group';
-import { scaleLinear } from '@visx/scale';
 import { HeatmapRect } from '@visx/heatmap';
+import { Axis, Orientation} from '@visx/axis';
+import { scaleLinear, coerceNumber } from '@visx/scale';
 import data from '../data/individual.json';
 
-const cool1 = '#122549';
-const cool2 = '#b4fbde';
+const tickLabelColor = '#fff';
+
+const tickLabelProps = () =>
+  ({
+    fill: tickLabelColor,
+    fontSize: 12,
+    fontFamily: 'sans-serif',
+    textAnchor: 'middle',
+  });
+const axisColor = '#fff';
 export const background = '#28272c';
 
 function getHeatmapData(data) {
@@ -58,6 +67,10 @@ const opacityScale = scaleLinear({
 
 const defaultMargin = { top: 10, left: 20, right: 20, bottom: 110 };
 
+const getMinMax = (vals) => {
+    const numericVals = vals.map(coerceNumber);
+    return [Math.min(...numericVals), Math.max(...numericVals)];
+  };  
 
 const HeatMapVisx = ({
   width,
@@ -65,8 +78,8 @@ const HeatMapVisx = ({
   margin = defaultMargin,
   separation = 20,
 }) => {
-    console.log(colorMax, bucketSizeMax);
-    //binData = getHeatmapData(data);
+    //console.log(colorMax, bucketSizeMax);
+
     // bounds
     const size =
     width > margin.left + margin.right ? width - margin.left - margin.right - separation : width;
@@ -78,11 +91,51 @@ const HeatMapVisx = ({
     xScale.range([0, xMax]);
     yScale.range([yMax, 0]);
 
-    console.log(binData);
+   // console.log(binData);
+
+    //axis
+    const AxisComponent = Axis;
+    let arrayX = [1, 12, 24];
+    const axis = {
+        scale: scaleLinear({
+            domain: getMinMax(arrayX),
+            range: [0, xMax],
+        }),
+        values: arrayX,
+        tickFormat: (v, index, ticks) =>
+            index === 0 ? 'first' : index === ticks[ticks.length - 1].index ? 'last' : `${v}`,
+        label: 'linear',
+    }
+
+    const yaxis = {
+        scale: scaleLinear({
+            domain: getMinMax(arrayX),
+            range: [yMax, 0],
+        }),
+        values: arrayX,
+        tickFormat: (v, index, ticks) =>
+            index === 0 ? 'first' : index === ticks[ticks.length - 1].index ? 'last' : `${v}`,
+        label: 'linear',
+    }
 
   return width < 10 ? null : (
     <svg width={width} height={height}>
       <rect x={0} y={0} width={width} height={height} rx={14} fill={background} />
+      <AxisComponent
+        // force remount when this changes to see the animation difference
+        //key={`axis-${animationTrajectory}`}
+        orientation={Orientation.left}
+        top={25}
+        left={margin.left}
+        scale={yaxis.scale}
+        //tickFormat={axis.tickFormat}
+        stroke={axisColor}
+        tickStroke={axisColor}
+        tickLabelProps={tickLabelProps}
+        tickValues={yaxis.values}
+        numTicks={yaxis.label === 'time' ? 6 : undefined}
+        label={yaxis.label}
+      />
       <Group top={margin.top} left={margin.left}>
         <HeatmapRect
           data={binData}
@@ -117,6 +170,32 @@ const HeatMapVisx = ({
           }
         </HeatmapRect>
       </Group>
+      <AxisComponent
+            // force remount when this changes to see the animation difference
+            //key={`axis-${animationTrajectory}`}
+            orientation={Orientation.bottom}
+            top={410}
+            left={margin.left + 5}
+            scale={axis.scale}
+            //tickFormat={axis.tickFormat}
+            stroke={axisColor}
+            tickStroke={axisColor}
+            tickLabelProps={tickLabelProps}
+            tickValues={axis.values}
+            numTicks={axis.label === 'time' ? 6 : undefined}
+            label={axis.label}
+            labelProps={{
+                x: width + 30,
+                y: -10,
+                fill: 'yellow',
+                fontSize: 18,
+                strokeWidth: 0,
+                stroke: '#fff',
+                paintOrder: 'stroke',
+                fontFamily: 'sans-serif',
+                textAnchor: 'start',
+            }}
+        />
     </svg>
   );
 };
