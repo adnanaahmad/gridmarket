@@ -61,16 +61,16 @@ function App() {
         <ParentSize>{({ width, height }) => <HeatMapVisx width={width} height={height} />}</ParentSize>
       </div>
       <div style={{marginBottom: '100px', height: 500}}>
-        <ParentSize>{({ width, height }) => <ViolinplotVisx width={width} height={height} />}</ParentSize>
+        <ParentSize>{({ width, height }) => <ScatterPlotVisx width={width} height={height} />}</ParentSize>
+      </div>
+      <div style={{marginBottom: '100px', height: 500}}>
+        <ParentSize>{({ width, height }) => <BarchartVisx width={width} height={height} />}</ParentSize>
       </div>
       <div style={{marginBottom: '100px', height: 500}}>
         <ParentSize>{({ width, height }) => <LineplotVisx width={width} height={height} />}</ParentSize>
       </div>
       <div style={{marginBottom: '100px', height: 500}}>
-        <ParentSize>{({ width, height }) => <ScatterPlotVisx width={width} height={height} />}</ParentSize>
-      </div>
-      <div style={{marginBottom: '100px', height: 500}}>
-        <ParentSize>{({ width, height }) => <BarchartVisx width={width} height={height} />}</ParentSize>
+        <ParentSize>{({ width, height }) => <ViolinplotVisx width={width} height={height} />}</ParentSize>
       </div>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>
         Mock Data Example
