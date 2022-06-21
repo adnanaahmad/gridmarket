@@ -24,8 +24,8 @@ function getPoints (){
             ymin = Math.min(ymin, Number(x.Capex_Payback));
         }
     });
-    console.log(xmin, ymin);
-    console.log(xmax, ymax);
+    //console.log(xmin, ymin);
+    //console.log(xmax, ymax);
     return d
 }
 const points = getPoints();
@@ -58,7 +58,7 @@ export default function ScatterPlotVisx
       [height],
     );
 
-    console.log(points)
+   // console.log(points)
 
     return (
       <div>

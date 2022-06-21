@@ -11,6 +11,7 @@ import ViolinplotVisx from './visx/components/violinplot';
 import BoxplotVisx from './visx/components/boxplot';
 import LineplotVisx from './visx/components/lineplot';
 import ScatterPlotVisx from './visx/components/scatterplot';
+import BarchartVisx from './visx/components/barchart';
 
 
 function App() {
@@ -68,9 +69,9 @@ function App() {
       <div style={{marginBottom: '100px', height: 500}}>
         <ParentSize>{({ width, height }) => <ScatterPlotVisx width={width} height={height} />}</ParentSize>
       </div>
-
-
-
+      <div style={{marginBottom: '100px', height: 500}}>
+        <ParentSize>{({ width, height }) => <BarchartVisx width={width} height={height} />}</ParentSize>
+      </div>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>
         Mock Data Example
       </div>
