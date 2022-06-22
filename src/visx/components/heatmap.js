@@ -117,6 +117,13 @@ const HeatMapVisx = ({
             index === 0 ? 'first' : index === ticks[ticks.length - 1].index ? 'last' : `${v}`,
         label: 'linear',
     }
+    const [state, setState] = React.useState(false);
+    React.useEffect(() => {
+      setTimeout(() => {
+        setState(true);
+        console.log('hello', state);
+      }, 5000)
+  })
 
   return width < 10 ? null : (
     <svg width={width} height={height}>
@@ -138,7 +145,7 @@ const HeatMapVisx = ({
       />
       <Group top={margin.top} left={margin.left}>
         <HeatmapRect
-          data={binData}
+          data={state ? binData.slice(1,15) : binData}
           xScale={(d) => xScale(d) ?? 0}
           yScale={(d) => yScale(d) ?? 0}
           colorScale={rectColorScale}
