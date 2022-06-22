@@ -121,7 +121,7 @@ const HeatMapVisx = ({
     React.useEffect(() => {
       setTimeout(() => {
         setState(true);
-        console.log('hello', state);
+        //console.log('hello', state);
       }, 5000)
   })
 

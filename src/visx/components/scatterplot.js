@@ -39,6 +39,7 @@ export default function ScatterPlotVisx
     height=600,
     tooltipData,
   }) {
+    const [pointsArray, setPointsArray] = React.useState(points);
     //if (width < 10) return null;
     const svgRef = useRef(null);
     const xScale = useMemo(
@@ -57,6 +58,13 @@ export default function ScatterPlotVisx
         }),
       [height],
     );
+
+    React.useEffect(() => {
+      setTimeout(() => {
+        setPointsArray(points.slice(1,100));
+        //console.log('hello', points, pointsArray);
+      }, 5000)
+    })
 
    // console.log(points)
 
@@ -81,7 +89,7 @@ export default function ScatterPlotVisx
                 top={height-63}
                 scale={xScale}
             />
-            {points.map((point, i) => (
+            {pointsArray.map((point, i) => (
               <Circle
                 key={`point-${point[0]}-${i}`}
                 className="dot"
