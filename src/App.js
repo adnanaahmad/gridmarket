@@ -35,6 +35,9 @@ function App() {
       <div style={{ marginBottom: '100px'}}>
         <StackedBar/>
       </div>
+      <div style={{ marginBottom: '100px', height: 500, width: '100%'}}>
+        <Violinplot/>
+      </div>
       <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
         <div style={{margin: 'auto'}}>Country</div>
         <div style={{width: '100%'}}>
@@ -45,9 +48,6 @@ function App() {
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Mock Data Examples</div>
       <div style={{ marginBottom: '100px'}}>
         <BoxplotExample/>
-      </div>
-      <div style={{ marginBottom: '100px'}}>
-        <Violinplot/>
       </div>
       <div style={{ marginBottom: '100px'}}>
         <Piechart/>
