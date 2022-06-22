@@ -1,32 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import { Scatter } from '@ant-design/plots';
 import { data as realData } from '../data/testData';
+import sdata from '../visx/data/portfolio.json';
 
 export default function ScatterPlot() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    let scatterplotData = realData['Analyses'].map((node) => {
-        return {
-            Longitude: Number(node.Longitude),
-            Latitude: Number(node.Latitude), 
-            State: node.State,
-        }
+    let scatterplotData = [];
+    sdata.forEach(x => {
+      if (!isNaN(x.IRR) && !isNaN(x.Capex_Payback)){
+        scatterplotData.push({
+            x: Number(x.IRR),
+            y: Number(x.Capex_Payback)
+          });
+      }
     });
     setData(scatterplotData);
     
-    setTimeout(()=> {
-      setData(scatterplotData.slice(0,100));
-    }, 5000);
+    // setTimeout(()=> {
+    //   setData(scatterplotData.slice(0,100));
+    // }, 5000);
   }, []);
 
   const config = {
     appendPadding: 10,
     data,
-    xField: 'Longitude',
-    yField: 'Latitude',
+    xField: 'x',
+    yField: 'y',
     shape: 'circle',
-    colorField: 'State',
     size: 4,
     yAxis: {
       nice: true,
