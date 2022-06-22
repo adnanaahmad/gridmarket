@@ -19,10 +19,10 @@ function App() {
     <div style={{padding: 5, height: '100%'}}>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Real Data Examples</div>
       <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
-        <div style={{margin: 'auto'}}>Latitude</div>
+        <div style={{margin: 'auto'}}>Solar_gen</div>
         <div style={{width: '100%'}}>
           <LineChartExample/>
-          <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Longitude</div>
+          <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Hour</div>
         </div>
       </div>
       <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
@@ -52,7 +52,7 @@ function App() {
       <div style={{ marginBottom: '100px'}}>
         <Piechart/>
       </div>
-      <div style={{width: '100%', border: '1px solid', marginBottom: 100}}></div>
+      {/* <div style={{width: '100%', border: '1px solid', marginBottom: 100}}></div>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'xx-large'}}>
         Visx Charts
       </div>
@@ -77,7 +77,7 @@ function App() {
       </div>
       <div style={{marginBottom: '100px', height: 500}}>
         <ParentSize>{({ width, height }) => <BoxplotVisx width={width} height={height} />}</ParentSize>
-      </div>
+      </div> */}
     </div>
   );
 }
