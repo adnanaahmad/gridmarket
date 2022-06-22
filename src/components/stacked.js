@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { Column } from '@ant-design/plots';
+import barchartData from '../visx/data/stacked_chart.json';
 
 export default function StackedBar () {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    asyncFetch();
+    let bdata =[];
+
+    barchartData.forEach(x => {
+      bdata.push({
+        'Type': x.Type,
+        'pct': Number(x.pct),
+        'Group': x.Group
+      })
+    })
+    setData(bdata);
   }, []);
 
-  const asyncFetch = () => {
-    fetch('https://gw.alipayobjects.com/os/antfincdn/8elHX%26irfq/stack-column-data.json')
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => {
-        console.log('fetch data failed', error);
-      });
-  };
   const config = {
     data,
     isStack: true,
-    xField: 'year',
-    yField: 'value',
-    seriesField: 'type',
+    xField: 'Type',
+    yField: 'pct',
+    seriesField: 'Group',
     label: {
       position: 'middle',
       // 'top', 'bottom', 'middle'
