@@ -73,6 +73,22 @@ export default function BarchartVisx({
     scroll: true,
   });
 
+  const [data, setData] = React.useState(bData);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      //setPointsArray(points.slice(1,100));
+      bData[2].CHP = 70;
+      bData[2].Solar = 15;
+      bData[2].Storage = 15;
+
+      bData[4].CHP = 90;
+      bData[4].Solar = 10;
+      setData(bData);
+      console.log('hello', data);
+    }, 5000)
+  },[])
+
   if (width < 10) return null;
   // bounds
   const xMax = width;
@@ -80,8 +96,6 @@ export default function BarchartVisx({
 
   typeScale.rangeRound([0, xMax]);
   pecScale.range([yMax, 0]);
-
-  console.log(bData);
 
   return width < 10 ? null : (
     <div style={{ position: 'relative' }}>
