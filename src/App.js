@@ -39,10 +39,10 @@ function App() {
         <Violinplot/>
       </div>
       <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
-        <div style={{margin: 'auto'}}>Country</div>
+        <div style={{margin: 'auto'}}>Hour</div>
         <div style={{width: '100%'}}>
           <HeatmapExample/>
-          <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Longitude</div>
+          <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Day</div>
         </div>
       </div>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Mock Data Examples</div>
