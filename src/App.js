@@ -49,9 +49,9 @@ function App() {
       <div style={{ marginBottom: '100px'}}>
         <BoxplotExample/>
       </div>
-      <div style={{ marginBottom: '100px'}}>
+      {/* <div style={{ marginBottom: '100px'}}>
         <Piechart/>
-      </div>
+      </div> */}
       {/* <div style={{width: '100%', border: '1px solid', marginBottom: 100}}></div>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'xx-large'}}>
         Visx Charts
