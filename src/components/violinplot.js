@@ -16,10 +16,16 @@ export default function Violinplot() {
         y: el.usage
       })
     })
-    setData(vdata);
+    let v = [...vdata];
+    setData(v.slice(1, vdata.length/2));
     setTimeout(() => {
       setW(true);
     },1000)
+    setTimeout(() => {
+      setW(false);
+      setData([...vdata]);
+    },5000)
+   
     //asyncFetch();
   }, []);
 
@@ -31,7 +37,7 @@ export default function Violinplot() {
   };
 
   return(
-    <div style={{width: w ?'100%' : '90%'}}>
+    <div style={{width: w ?'100%' : '99%'}}>
       <Violin {...config} />
     </div>
   )
