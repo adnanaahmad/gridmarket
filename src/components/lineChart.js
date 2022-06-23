@@ -25,13 +25,14 @@ export default function LineChartExample() {
   useEffect(() => {
     let chartData = getData();
 
-    setData(chartData);
+    setData(chartData.slice(1,(chartData.length/2)-1));
 
     console.log(data);
 
-    // setTimeout(()=> {
-    //   setData(chartData.slice(0,100));
-    // }, 5000);
+    setTimeout(()=> {
+      let cdata = getData();
+      setData(cdata);
+    }, 5000);
     
   }, []);
 
