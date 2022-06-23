@@ -7,13 +7,7 @@ export default function HeatmapExample() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // let heatmapData = realData['Analyses'].map((node) => {
-    //     return {
-    //         Longitude: Number(node.Longitude), 
-    //         Country: node.Country,
-    //         'Capex: Payback Period': Number(node['Capex: Payback Period'])
-    //     }
-    // });
+
     let heatmapData = hdata.map((node) => {
       return {
           'hour': node.hour, 
@@ -21,11 +15,12 @@ export default function HeatmapExample() {
           'original_load': Number(node['original_load'])
       }
     });
-    setData(heatmapData);
+    let h = [...heatmapData];
+    setData(h.slice(1,274));
 
-    // setTimeout(()=> {
-    //   setData(heatmapData.slice(0,100));
-    // }, 5000);
+    setTimeout(()=> {
+      setData(heatmapData);
+    }, 5000);
 
   }, []);
 
