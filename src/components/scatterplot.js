@@ -16,11 +16,12 @@ export default function ScatterPlot() {
           });
       }
     });
-    setData(scatterplotData);
+    let spdata = [...scatterplotData];
+    setData(spdata.slice(1, spdata.length/2));
     
-    // setTimeout(()=> {
-    //   setData(scatterplotData.slice(0,100));
-    // }, 5000);
+    setTimeout(()=> {
+      setData(scatterplotData);
+    }, 5000);
   }, []);
 
   const config = {
