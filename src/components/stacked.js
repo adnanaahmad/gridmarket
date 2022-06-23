@@ -14,8 +14,14 @@ export default function StackedBar () {
         'pct': Number(x.pct),
         'Group': x.Group
       })
-    })
-    setData(bdata);
+    });
+    let b = [...bdata];
+    setData(b.slice(1, bdata.length/2));
+
+    setTimeout(()=> {
+      setData(bdata);
+    }, 5000);
+
   }, []);
 
   const config = {
