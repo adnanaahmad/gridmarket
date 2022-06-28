@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Scatter } from '@ant-design/plots';
-import { data as realData } from '../data/testData';
 import sdata from '../visx/data/portfolio.json';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export default function ScatterPlot() {
   const [data, setData] = useState([]);
+  const [size, setSize] = React.useState(2);
+
+  const handleChangeSize = (event) => {
+    setSize(event.target.value);
+  };
 
   useEffect(() => {
     let scatterplotData = [];
@@ -16,12 +25,13 @@ export default function ScatterPlot() {
           });
       }
     });
-    let spdata = [...scatterplotData];
-    setData(spdata.slice(1, spdata.length/2));
+    setData(scatterplotData);
+    // let spdata = [...scatterplotData];
+    // setData(spdata.slice(1, spdata.length/2));
     
-    setTimeout(()=> {
-      setData(scatterplotData);
-    }, 5000);
+    // setTimeout(()=> {
+    //   setData(scatterplotData);
+    // }, 5000);
   }, []);
 
   const config = {
@@ -30,7 +40,7 @@ export default function ScatterPlot() {
     xField: 'x',
     yField: 'y',
     shape: 'circle',
-    size: 4,
+    size,
     yAxis: {
       nice: true,
       line: {
@@ -56,5 +66,25 @@ export default function ScatterPlot() {
     },
   };
 
-  return <Scatter {...config} />;
+  return (
+  <Box>
+    <Box sx={{ maxWidth: 400 }}>
+      <FormControl variant="standard" fullWidth>
+        <InputLabel id="label-size">Life time capital expenditure size</InputLabel>
+        <Select
+          labelId="label-size"
+          id="select-size"
+          value={size}
+          onChange={handleChangeSize}
+        >
+          <MenuItem value={2}>1</MenuItem>
+          <MenuItem value={4}>2</MenuItem>
+          <MenuItem value={8}>3</MenuItem>
+          <MenuItem value={12}>4</MenuItem>
+        </Select>
+      </FormControl>
+    </Box>
+    <Scatter {...config} />
+  </Box>
+  );
 };
