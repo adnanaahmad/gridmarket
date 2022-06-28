@@ -10,29 +10,36 @@ import Select from '@mui/material/Select';
 export default function ScatterPlot() {
   const [data, setData] = useState([]);
   const [size, setSize] = React.useState(2);
+  const [x, setX] = React.useState('IRR');
+  const [y, setY] = React.useState('Capex_Payback');
 
   const handleChangeSize = (event) => {
     setSize(event.target.value);
   };
 
+  const handleChangeX = (event) => {
+    setX(event.target.value);
+  };
+  const handleChangeY = (event) => {
+    setY(event.target.value);
+  };
+
+  // RR, Capex_Payback, Capex_Asset, NPV_estimated_capex, NPV_estimated_PPA, PPA
+
+
+
   useEffect(() => {
     let scatterplotData = [];
-    sdata.forEach(x => {
-      if (!isNaN(x.IRR) && !isNaN(x.Capex_Payback)){
+    sdata.forEach(el => {
+      if (!isNaN(el[x]) && !isNaN(el[y])){
         scatterplotData.push({
-            x: Number(x.IRR),
-            y: Number(x.Capex_Payback)
+            x: Number(el[x]),
+            y: Number(el[y])
           });
       }
     });
     setData(scatterplotData);
-    // let spdata = [...scatterplotData];
-    // setData(spdata.slice(1, spdata.length/2));
-    
-    // setTimeout(()=> {
-    //   setData(scatterplotData);
-    // }, 5000);
-  }, []);
+  }, [x, y]);
 
   const config = {
     appendPadding: 10,
@@ -69,6 +76,38 @@ export default function ScatterPlot() {
   return (
   <Box>
     <Box sx={{ maxWidth: 400 }}>
+    <FormControl variant="standard" fullWidth>
+        <InputLabel id="label-y">Y-axis</InputLabel>
+        <Select
+          labelId="label-y"
+          id="select-y"
+          value={y}
+          onChange={handleChangeY}
+        >
+          <MenuItem value={'IRR'}>IRR</MenuItem>
+          <MenuItem value={'Capex_Payback'}>Capex_Payback</MenuItem>
+          <MenuItem value={'Capex_Asset'}>Capex_Asset</MenuItem>
+          <MenuItem value={'NPV_estimated_capex'}>NPV_estimated_capex</MenuItem>
+          <MenuItem value={'NPV_estimated_PPA'}>NPV_estimated_PPA</MenuItem>
+          <MenuItem value={'PPA'}>PPA</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl variant="standard" fullWidth>
+        <InputLabel id="label-x">X-axis</InputLabel>
+        <Select
+          labelId="label-x"
+          id="select-x"
+          value={x}
+          onChange={handleChangeX}
+        >
+          <MenuItem value={'IRR'}>IRR</MenuItem>
+          <MenuItem value={'Capex_Payback'}>Capex_Payback</MenuItem>
+          <MenuItem value={'Capex_Asset'}>Capex_Asset</MenuItem>
+          <MenuItem value={'NPV_estimated_capex'}>NPV_estimated_capex</MenuItem>
+          <MenuItem value={'NPV_estimated_PPA'}>NPV_estimated_PPA</MenuItem>
+          <MenuItem value={'PPA'}>PPA</MenuItem>
+        </Select>
+      </FormControl>
       <FormControl variant="standard" fullWidth>
         <InputLabel id="label-size">Life time capital expenditure size</InputLabel>
         <Select
