@@ -1,40 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Line } from '@ant-design/plots';
 import lineData from '../visx/data/individual.json';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
-function getData() {
-  let data = [];
-  let set = {};
-  lineData.forEach(x => {
-      if(!set[x.hour]) {
-          set[x.hour] = 1;
-          data.push({
-              x: x.hour,
-              y: Number(x.solar_gen)
-          });
-      }
-
-  });
-  data = data.sort((a, b) => (a.x > b.x ? 1 : -1));
-  return data;
-}
 
 export default function LineChartExample() {
   const [data, setData] = useState([]);
+  const [y, setY] = React.useState('battery_output');
+  const handleChangeY = (event) => {
+    setY(event.target.value);
+  };
 
   useEffect(() => {
-    let chartData = getData();
-
-    setData(chartData.slice(1,(chartData.length/2)-1));
-
-    console.log(data);
-
-    setTimeout(()=> {
-      let cdata = getData();
-      setData(cdata);
-    }, 5000);
-    
-  }, []);
+    let cdata = [];
+    //let set = {};
+    lineData.forEach(x => {
+        cdata.push({
+          x: x.hour,
+          y: Number(x[y])
+      });
+  
+    });
+    cdata = cdata.sort((a, b) => (a.x > b.x ? 1 : -1));
+    setData(cdata);
+  }, [y]);
 
   const config = {
     data,
@@ -43,5 +36,25 @@ export default function LineChartExample() {
     yField: 'y',
   };
 
-  return <Line {...config} />;
+  return (
+      <Box>
+        <Box sx={{ maxWidth: 400, mb: 10 }}>
+          <FormControl variant="standard" fullWidth>
+            <InputLabel id="label-y">Y-axis</InputLabel>
+            <Select
+              labelId="label-y"
+              id="select-y"
+              value={y}
+              onChange={handleChangeY}
+            >
+              <MenuItem value={'battery_output'}>battery_output</MenuItem>
+              <MenuItem value={'original_load'}>original_load</MenuItem>
+              <MenuItem value={'solar_gen'}>solar_gen</MenuItem>
+              <MenuItem value={'net_load'}>net_load</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Line {...config} />
+      </Box>
+  )
 };
