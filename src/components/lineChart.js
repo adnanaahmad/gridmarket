@@ -37,24 +37,30 @@ export default function LineChartExample() {
   };
 
   return (
-      <Box>
-        <Box sx={{ maxWidth: 400, mb: 10 }}>
-          <FormControl variant="standard" fullWidth>
-            <InputLabel id="label-y">Y-axis</InputLabel>
-            <Select
-              labelId="label-y"
-              id="select-y"
-              value={y}
-              onChange={handleChangeY}
-            >
-              <MenuItem value={'battery_output'}>battery_output</MenuItem>
-              <MenuItem value={'original_load'}>original_load</MenuItem>
-              <MenuItem value={'solar_gen'}>solar_gen</MenuItem>
-              <MenuItem value={'net_load'}>net_load</MenuItem>
-            </Select>
-          </FormControl>
+    <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
+      <div style={{margin: 'auto'}}>{y}</div>
+      <div style={{width: '100%'}}>
+        <Box>
+          <Box sx={{ maxWidth: 400, mb: 10 }}>
+            <FormControl variant="standard" fullWidth>
+              <InputLabel id="label-y">Y-axis</InputLabel>
+              <Select
+                labelId="label-y"
+                id="select-y"
+                value={y}
+                onChange={handleChangeY}
+              >
+                <MenuItem value={'battery_output'}>battery_output</MenuItem>
+                <MenuItem value={'original_load'}>original_load</MenuItem>
+                <MenuItem value={'solar_gen'}>solar_gen</MenuItem>
+                <MenuItem value={'net_load'}>net_load</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Line {...config} />
         </Box>
-        <Line {...config} />
-      </Box>
+        <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Hour</div>
+      </div>
+    </div>
   )
 };
