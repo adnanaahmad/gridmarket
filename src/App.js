@@ -12,6 +12,7 @@ import BoxplotVisx from './visx/components/boxplot';
 import LineplotVisx from './visx/components/lineplot';
 import ScatterPlotVisx from './visx/components/scatterplot';
 import BarchartVisx from './visx/components/barchart';
+import LiveChartExample from './components/liveChart';
 
 
 function App() {
@@ -45,6 +46,15 @@ function App() {
           <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Day</div>
         </div>
       </div>
+
+      <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
+        <div style={{margin: 'auto'}}>Solar_gen</div>
+        <div style={{width: '100%'}}>
+          <LiveChartExample/>
+          <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Hour</div>
+        </div>
+      </div>
+
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Mock Data Examples</div>
       <div style={{ marginBottom: '100px'}}>
         <BoxplotExample/>

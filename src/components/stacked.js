@@ -21,23 +21,24 @@ export default function StackedBar () {
 
       bdata.push({
         'Type': x.Type+units[x.Type],
-        'pct': x.Spending,
-        'Group': x.Group
+        'pct': Number(x.pct),
+        'Group': x.Group,
+        'Spending': x.Spending,
       })
     });
     setData(bdata);
-    const an = [];
-    each(groupBy(bdata, 'Type'), (values, k) => {
-      const value = values.reduce((a, b) => a + b.pct, 0);
-      an.push({
-        type: 'text',
-        position: [k, value],
-        content: `${value}`,
-        style: { textAlign: 'center', fontSize: 14, fill: 'rgba(0,0,0,0.85)' },
-        offsetY: -10,
-      });
-    });
-    setAnnotations(an);
+    // const an = [];
+    // each(groupBy(bdata, 'Type'), (values, k) => {
+    //   const value = values.reduce((a, b) => a + b.Spending, 0);
+    //   an.push({
+    //     type: 'text',
+    //     position: [k, value],
+    //     content: `${value}`,
+    //     style: { textAlign: 'center', fontSize: 14, fill: 'rgba(0,0,0,0.85)' },
+    //     offsetY: -10,
+    //   });
+    // });
+    // setAnnotations(an);
     // let b = [...bdata];
     // setData(b.slice(1, bdata.length/2));
 
@@ -50,6 +51,7 @@ export default function StackedBar () {
   const config = {
     data,
     isStack: true,
+    isPercent: true,
     xField: 'Type',
     yField: 'pct',
     seriesField: 'Group',
