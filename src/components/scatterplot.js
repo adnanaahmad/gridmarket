@@ -74,56 +74,62 @@ export default function ScatterPlot() {
   };
 
   return (
-  <Box>
-    <Box sx={{ maxWidth: 400 }}>
-    <FormControl variant="standard" fullWidth>
-        <InputLabel id="label-y">Y-axis</InputLabel>
-        <Select
-          labelId="label-y"
-          id="select-y"
-          value={y}
-          onChange={handleChangeY}
-        >
-          <MenuItem value={'IRR'}>IRR</MenuItem>
-          <MenuItem value={'Capex_Payback'}>Capex_Payback</MenuItem>
-          <MenuItem value={'Capex_Asset'}>Capex_Asset</MenuItem>
-          <MenuItem value={'NPV_estimated_capex'}>NPV_estimated_capex</MenuItem>
-          <MenuItem value={'NPV_estimated_PPA'}>NPV_estimated_PPA</MenuItem>
-          <MenuItem value={'PPA'}>PPA</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl variant="standard" fullWidth>
-        <InputLabel id="label-x">X-axis</InputLabel>
-        <Select
-          labelId="label-x"
-          id="select-x"
-          value={x}
-          onChange={handleChangeX}
-        >
-          <MenuItem value={'IRR'}>IRR</MenuItem>
-          <MenuItem value={'Capex_Payback'}>Capex_Payback</MenuItem>
-          <MenuItem value={'Capex_Asset'}>Capex_Asset</MenuItem>
-          <MenuItem value={'NPV_estimated_capex'}>NPV_estimated_capex</MenuItem>
-          <MenuItem value={'NPV_estimated_PPA'}>NPV_estimated_PPA</MenuItem>
-          <MenuItem value={'PPA'}>PPA</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl variant="standard" fullWidth>
-        <InputLabel id="label-size">Life time capital expenditure size</InputLabel>
-        <Select
-          labelId="label-size"
-          id="select-size"
-          value={size}
-          onChange={handleChangeSize}
-        >
-          <MenuItem value={2}>1</MenuItem>
-          <MenuItem value={4}>2</MenuItem>
-          <MenuItem value={8}>3</MenuItem>
-          <MenuItem value={12}>4</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-    <Scatter {...config} />
-  </Box>
+    <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
+      <div style={{margin: 'auto'}}>{y}</div>
+      <div style={{width: '100%'}}>
+      <Box>
+        <Box sx={{ maxWidth: 400 }}>
+        <FormControl variant="standard" fullWidth>
+            <InputLabel id="label-y">Y-axis</InputLabel>
+            <Select
+              labelId="label-y"
+              id="select-y"
+              value={y}
+              onChange={handleChangeY}
+            >
+              <MenuItem value={'IRR'}>IRR</MenuItem>
+              <MenuItem value={'Capex_Payback'}>Capex_Payback</MenuItem>
+              <MenuItem value={'Capex_Asset'}>Capex_Asset</MenuItem>
+              <MenuItem value={'NPV_estimated_capex'}>NPV_estimated_capex</MenuItem>
+              <MenuItem value={'NPV_estimated_PPA'}>NPV_estimated_PPA</MenuItem>
+              <MenuItem value={'PPA'}>PPA</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl variant="standard" fullWidth>
+            <InputLabel id="label-x">X-axis</InputLabel>
+            <Select
+              labelId="label-x"
+              id="select-x"
+              value={x}
+              onChange={handleChangeX}
+            >
+              <MenuItem value={'IRR'}>IRR</MenuItem>
+              <MenuItem value={'Capex_Payback'}>Capex_Payback</MenuItem>
+              <MenuItem value={'Capex_Asset'}>Capex_Asset</MenuItem>
+              <MenuItem value={'NPV_estimated_capex'}>NPV_estimated_capex</MenuItem>
+              <MenuItem value={'NPV_estimated_PPA'}>NPV_estimated_PPA</MenuItem>
+              <MenuItem value={'PPA'}>PPA</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl variant="standard" fullWidth>
+            <InputLabel id="label-size">Life time capital expenditure size</InputLabel>
+            <Select
+              labelId="label-size"
+              id="select-size"
+              value={size}
+              onChange={handleChangeSize}
+            >
+              <MenuItem value={2}>1</MenuItem>
+              <MenuItem value={4}>2</MenuItem>
+              <MenuItem value={8}>3</MenuItem>
+              <MenuItem value={12}>4</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        <Scatter {...config} />
+      </Box>
+        <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>{x}</div>
+      </div>
+    </div>
   );
 };

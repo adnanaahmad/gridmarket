@@ -20,13 +20,7 @@ function App() {
     <div style={{padding: 5, height: '100%'}}>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Real Data Examples</div>
       <LineChartExample/>
-      <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
-        <div style={{margin: 'auto'}}>IRR</div>
-        <div style={{width: '100%'}}>
-          <ScatterPlot/>
-          <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Capex_Payback</div>
-        </div>
-      </div>
+      <ScatterPlot/>
       <div style={{ marginBottom: '100px'}}>
         <StackedBar/>
       </div>
