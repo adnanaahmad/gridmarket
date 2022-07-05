@@ -18,14 +18,14 @@ export default function LineChartExample() {
   useEffect(() => {
     let cdata = [];
     //let set = {};
-    lineData.forEach(x => {
+    lineData.forEach((x, index) => {
         cdata.push({
-          x: x.hour,
+          x: index,
           y: Number(x[y])
       });
   
     });
-    cdata = cdata.sort((a, b) => (a.x > b.x ? 1 : -1));
+    //cdata = cdata.sort((a, b) => (a.x > b.x ? 1 : -1));
     setData(cdata);
   }, [y]);
 
