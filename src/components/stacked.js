@@ -18,7 +18,6 @@ export default function StackedBar () {
     }
 
     barchartData.forEach(x => {
-
       bdata.push({
         'Type': x.Type+units[x.Type],
         'pct': Number(x.pct),
@@ -26,6 +25,18 @@ export default function StackedBar () {
         'Spending': x.Spending,
       })
     });
+    // const an = [];
+    // each(groupBy(bdata, 'Type'), (values, k) => {
+    //   const value = values.reduce((a, b) => a + b.pct, 0);
+    //   an.push({
+    //     type: 'text',
+    //     position: [k, value],
+    //     content: `${value}`,
+    //     style: { textAlign: 'center', fontSize: 14, fill: 'rgba(0,0,0,0.85)' },
+    //     offsetY: -10,
+    //   });
+    // });
+    // setAnnotations(an);
     setData(bdata);
 
   }, []);
