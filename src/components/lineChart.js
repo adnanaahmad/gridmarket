@@ -2,61 +2,58 @@ import React, { useState, useEffect } from 'react';
 import { Line } from '@ant-design/plots';
 import lineData from '../visx/data/individual.json';
 import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { Button, Stack } from '@mui/material';
 
 
 export default function LineChartExample() {
+  const [originalData, setOriginalData] = useState([]);
   const [data, setData] = useState([]);
-  const [y, setY] = React.useState('battery_output');
-  const handleChangeY = (event) => {
-    setY(event.target.value);
-  };
 
   useEffect(() => {
+    const type = ['battery_output', 'original_load', 'solar_gen', 'net_load'];
     let cdata = [];
-    //let set = {};
-    lineData.forEach((x, index) => {
-        cdata.push({
-          x: index,
-          y: Number(x[y])
-      });
-  
+    lineData.forEach((element, index) => {
+        type.forEach(graph => {
+          cdata.push({
+            x: index,
+            y: Number(element[graph]),
+            category: graph
+          });
+        })
     });
-    //cdata = cdata.sort((a, b) => (a.x > b.x ? 1 : -1));
+    setOriginalData(cdata);
     setData(cdata);
-  }, [y]);
+  }, []);
+
+  function setChart(hours) {
+    if (hours === 8760) {
+      setData(originalData);
+    } else {
+      let cdata = originalData.filter(element => element.x <= hours);
+      setData(cdata);
+    }
+  }
 
   const config = {
     data,
     padding: 'auto',
     xField: 'x',
     yField: 'y',
+    seriesField: 'category',
   };
 
   return (
     <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
-      <div style={{margin: 'auto'}}>{y}</div>
       <div style={{width: '100%'}}>
+        <Stack direction={'row'} spacing={3} sx={{mb:10}}>
+          {/* <Button onClick={() => liveData()} variant="outlined">Live</Button> */}
+          <Button onClick={() => setChart(1*24)} variant="outlined">1D</Button>
+          <Button onClick={() => setChart(7*24)} variant="outlined">7D</Button>
+          <Button onClick={() => setChart(30*24)} variant="outlined">1M</Button>
+          <Button onClick={() => setChart(180*24)} variant="outlined">6M</Button>
+          <Button onClick={() => setChart(365*24)} variant="outlined">Max</Button>
+        </Stack>
         <Box>
-          <Box sx={{ maxWidth: 400, mb: 10 }}>
-            <FormControl variant="standard" fullWidth>
-              <InputLabel id="label-y">Y-axis</InputLabel>
-              <Select
-                labelId="label-y"
-                id="select-y"
-                value={y}
-                onChange={handleChangeY}
-              >
-                <MenuItem value={'battery_output'}>battery_output</MenuItem>
-                <MenuItem value={'original_load'}>original_load</MenuItem>
-                <MenuItem value={'solar_gen'}>solar_gen</MenuItem>
-                <MenuItem value={'net_load'}>net_load</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
           <Line {...config} />
         </Box>
         <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Hour</div>
