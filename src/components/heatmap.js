@@ -52,7 +52,7 @@ export default function HeatmapExample() {
 
   return (
     <div>
-      <div style={{ fontWeight: 500, fontSize: 'large', textAlign: 'center', marginBottom: 10}}>Solar Generation</div>
+      <div style={{ fontWeight: 500, fontSize: 'large', textAlign: 'center', marginBottom: 10}}>Solar Generation(kWh)</div>
       <Heatmap {...config} />
     </div>
   );
