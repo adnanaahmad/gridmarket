@@ -24,7 +24,7 @@ export default function Violinplot() {
     setTimeout(() => {
       setW(false);
       setData([...vdata]);
-    },5000)
+    },3000)
    
     //asyncFetch();
   }, []);
@@ -34,6 +34,10 @@ export default function Violinplot() {
     data: data,
     xField: 'x',
     yField: 'y',
+    yAxis: {
+      minLimit: 0,
+      min: 0
+    }  
   };
 
   return(
