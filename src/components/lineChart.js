@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Line } from '@ant-design/plots';
 import lineData from '../visx/data/individual.json';
 import Box from '@mui/material/Box';
 import { Button, Stack } from '@mui/material';
-
 import Slider from '@mui/material/Slider';
+import debounce from "lodash.debounce";
+
 
 const marks = [
   {
@@ -45,11 +46,47 @@ export default function LineChartExample() {
     100: 1.25
   }
 
-  const handleChange = (event, value) => {
-    if (typeof value === 'number') {
-      setZoom(zoomMap[value])
+  useEffect(() => {
+    if(originalData.length) {
+      let max = Math.max(...originalData.map(o => o.x));
+      setHighestX(max);
+    }
+  }, [data])
+  const [value2, setValue2] = React.useState([0, 100]);
+  const [highestX, setHighestX] = React.useState(0);
+  const minDistance = 10;
+  React.useMemo(() => 
+  (() => {
+    let next = Math.round((value2[1]/100)*highestX);
+    let prev = Math.round((value2[0]/100)*highestX);
+    if (prev !== next) {
+      console.log(prev, next);
+      let cdata = originalData.filter(element => element.x <= next && element.x >= prev);
+      setData([]);
+      setTimeout(() => {
+        setData(cdata);
+      }, 300)
+    }
+  })(), [value2]);
+  const handleChange2 = (event, newValue, activeThumb) => {
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+    if (newValue[1] - newValue[0] < minDistance) {
+      if (activeThumb === 0) {
+        const clamped = Math.min(newValue[0], 100 - minDistance);
+        setValue2([clamped, clamped + minDistance]);
+      } else {
+        const clamped = Math.max(newValue[1], minDistance);
+        setValue2([clamped - minDistance, clamped]);
+      }
+    } else {
+      setValue2(newValue);
     }
   };
+
+  //  const debouncedChangeHandler = useCallback(debounce(changeHandler, 300), []);
+
 
   useEffect(() => {
     const type = ['battery_output', 'original_load', 'solar_gen', 'net_load'];
@@ -129,16 +166,14 @@ export default function LineChartExample() {
         </Box>
         <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Hour</div>
         <Box sx={{ width: 300 }}>
-          <Slider
-          aria-label="Restricted values"
-          defaultValue={75}
-          valueLabelFormat={valueLabelFormat}
-          getAriaValueText={valuetext}
-          step={null}
-          valueLabelDisplay="auto"
-          marks={marks}
-          onChange={handleChange}
-          />
+        <Slider
+        getAriaLabel={() => 'Minimum distance shift'}
+        value={value2}
+        onChange={handleChange2}
+        valueLabelDisplay="auto"
+        getAriaValueText={valuetext}
+        disableSwap
+        />
         </Box>
       </div>
     </div>
