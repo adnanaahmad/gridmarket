@@ -52,13 +52,27 @@ export default function LineChartExample() {
       setHighestX(max);
     }
   }, [data])
-  const [value2, setValue2] = React.useState([0, 100]);
+  //const [value2, setValue2] = React.useState([0, 100]);
   const [highestX, setHighestX] = React.useState(0);
-  const minDistance = 10;
+  const [valueX, setValueX] = React.useState(100);
+  //const minDistance = 10;
+  // React.useMemo(() => 
+  // (() => {
+  //   let next = Math.round((value2[1]/100)*highestX);
+  //   let prev = Math.round((value2[0]/100)*highestX);
+  //   if (prev !== next) {
+  //     console.log(prev, next);
+  //     let cdata = originalData.filter(element => element.x <= next && element.x >= prev);
+  //     setData([]);
+  //     setTimeout(() => {
+  //       setData(cdata);
+  //     }, 300)
+  //   }
+  // })(), [value2]);
   React.useMemo(() => 
   (() => {
-    let next = Math.round((value2[1]/100)*highestX);
-    let prev = Math.round((value2[0]/100)*highestX);
+    let next = Math.round((valueX/100)*highestX);
+    let prev = 0;
     if (prev !== next) {
       console.log(prev, next);
       let cdata = originalData.filter(element => element.x <= next && element.x >= prev);
@@ -67,23 +81,26 @@ export default function LineChartExample() {
         setData(cdata);
       }, 300)
     }
-  })(), [value2]);
-  const handleChange2 = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-    if (newValue[1] - newValue[0] < minDistance) {
-      if (activeThumb === 0) {
-        const clamped = Math.min(newValue[0], 100 - minDistance);
-        setValue2([clamped, clamped + minDistance]);
-      } else {
-        const clamped = Math.max(newValue[1], minDistance);
-        setValue2([clamped - minDistance, clamped]);
-      }
-    } else {
-      setValue2(newValue);
-    }
-  };
+  })(), [valueX]);
+  const handleChangeX = (event, val, activeThumb) => {
+    setValueX(val);
+  }
+  // const handleChange2 = (event, newValue, activeThumb) => {
+  //   if (!Array.isArray(newValue)) {
+  //     return;
+  //   }
+  //   if (newValue[1] - newValue[0] < minDistance) {
+  //     if (activeThumb === 0) {
+  //       const clamped = Math.min(newValue[0], 100 - minDistance);
+  //       setValue2([clamped, clamped + minDistance]);
+  //     } else {
+  //       const clamped = Math.max(newValue[1], minDistance);
+  //       setValue2([clamped - minDistance, clamped]);
+  //     }
+  //   } else {
+  //     setValue2(newValue);
+  //   }
+  // };
 
   //  const debouncedChangeHandler = useCallback(debounce(changeHandler, 300), []);
 
@@ -166,14 +183,19 @@ export default function LineChartExample() {
         </Box>
         <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Hour</div>
         <Box sx={{ width: 300 }}>
-        <Slider
+        {/* <Slider
         getAriaLabel={() => 'Minimum distance shift'}
         value={value2}
         onChange={handleChange2}
         valueLabelDisplay="auto"
         getAriaValueText={valuetext}
         disableSwap
-        />
+        /> */}
+          <Slider defaultValue={50} 
+          value={valueX}
+          onChange={handleChangeX}
+          aria-label="Default"
+          valueLabelDisplay="auto" />
         </Box>
       </div>
     </div>
