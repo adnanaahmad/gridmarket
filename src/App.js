@@ -8,7 +8,7 @@ import Violinplot from './components/violinplot';
 
 function App() {
   return (
-    <div style={{padding: 5, height: '100%'}}>
+    <div style={{padding: 5, height: '100%', paddingBottom: 200}}>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Real Data Examples</div>
       <LineChartExample/>
       <ScatterPlot/>
@@ -25,10 +25,10 @@ function App() {
           <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Day</div>
         </div>
       </div>
-      <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Mock Data Examples</div>
-      <div style={{ marginBottom: '100px'}}>
+      <div>
         <BoxplotExample/>
       </div>
+      <div style={{height: 200}}></div>
     </div>
   );
 }
