@@ -81,17 +81,19 @@ export default function LineChartExample() {
 
   function liveData() {
     var i = 1;
-    let next = 24;
-    let prev = 0; 
+    let next = 49;
+    let prev = 25; 
+    let ccdata = originalData.filter(element => element.x <= next && element.x >= prev);
+    setData(ccdata);
     function myLoop() {
      setTo([...to, 
       setTimeout(function() {
         console.log('hello', i);
         i++;
         if (i < 50) {
-          let cdata = originalData.filter(element => element.x <= next && element.x >= prev);;
           prev++;
           next++;
+          let cdata = originalData.filter(element => element.x <= next && element.x >= prev);
           setData(cdata);
           myLoop();
         }
