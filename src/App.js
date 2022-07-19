@@ -4,6 +4,7 @@ import HeatmapExample from './components/heatmap';
 import ScatterPlot from './components/scatterplot';
 import BoxplotExample from './components/boxPlot';
 import Violinplot from './components/violinplot';
+import Bubbleplot from './components/bubbleplot';
 
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     <div style={{padding: 5, height: '100%', paddingBottom: 200}}>
       <div style={{marginBottom: 100, marginLeft: 50, marginTop: 20, fontWeight: 500, fontSize: 'large', textDecoration: 'underline'}}>Real Data Examples</div>
       <LineChartExample/>
-      <ScatterPlot/>
+      <Bubbleplot/>
       <div style={{ marginBottom: '100px'}}>
         <StackedBar/>
       </div>
