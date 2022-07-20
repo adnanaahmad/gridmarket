@@ -38,13 +38,6 @@ export default function LineChartExample() {
   const [originalData, setOriginalData] = useState([]);
   const [data, setData] = useState([]);
   const [to, setTo] = useState([]);
-  const [zoom, setZoom] = React.useState(1);
-  const zoomMap= {
-    25: .5,
-    50: .75,
-    75: 1,
-    100: 1.25
-  }
 
   useEffect(() => {
     if(originalData.length) {
@@ -196,7 +189,7 @@ export default function LineChartExample() {
           <Button onClick={() => setChart(180*24)} variant="outlined">6M</Button>
           <Button onClick={() => setChart(365*24)} variant="outlined">Max</Button>
         </Stack>
-        <Box sx={{zoom}}>
+        <Box>
           <Line {...config} />
         </Box>
         <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Hour</div>
