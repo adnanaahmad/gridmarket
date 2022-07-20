@@ -195,7 +195,10 @@ export default function LineChartExample() {
           value={valueX}
           onChange={handleChangeX}
           aria-label="Default"
-          valueLabelDisplay="auto" />
+          valueLabelDisplay="auto"
+          step={10}
+          marks
+          />
         </Box>
       </div>
     </div>
