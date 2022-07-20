@@ -176,6 +176,13 @@ export default function LineChartExample() {
       }),
       title: (v) => v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     },
+    smooth: true,
+    animation: {
+      appear: {
+        animation: 'path-in',
+        duration: 500,
+      },
+    },
   };
 
   return (
