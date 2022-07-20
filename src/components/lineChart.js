@@ -175,7 +175,14 @@ export default function LineChartExample() {
         // 数值格式化为千分位
         formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
       },
-    }
+    },
+    tooltip: {
+      formatter: (node) => ({
+        name: node.category,
+        value: node.y ?  node.y.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : node.y
+      }),
+      title: (v) => v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    },
   };
 
   return (
