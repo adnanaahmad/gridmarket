@@ -6,6 +6,7 @@ import { each, groupBy } from '@antv/util';
 export default function StackedBar () {
   const [data, setData] = useState([]);
   const [annotations, setAnnotations] = useState([]); 
+  let formatter = (v) => v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
   useEffect(() => {
     let bdata =[];
@@ -48,10 +49,15 @@ export default function StackedBar () {
     xField: 'Type',
     yField: 'pct',
     seriesField: 'Group',
+    yAxis: {
+      label: {
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
+    },
     label: {
       position: 'middle',
       content: (item) => {
-        return item.Spending;
+        return formatter(item.Spending);
       },
       layout: [
         {

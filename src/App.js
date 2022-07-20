@@ -1,7 +1,6 @@
 import LineChartExample from './components/lineChart';
 import StackedBar from './components/stacked';
 import HeatmapExample from './components/heatmap';
-import ScatterPlot from './components/scatterplot';
 import BoxplotExample from './components/boxPlot';
 import Violinplot from './components/violinplot';
 import Bubbleplot from './components/bubbleplot';

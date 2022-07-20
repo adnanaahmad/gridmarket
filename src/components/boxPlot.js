@@ -17,21 +17,31 @@ export default function BoxplotExample() {
       fillOpacity: 0.3,
     },
     animation: false,
+    yAxis: {
+      label: {
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
+    },
   };
   const config1= {
     ...config,
     data: [data[0]],
     yAxis: {
       //minLimit: 0,
-      min: -.5
+      min: -.5,
+      label: {
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
     },
   }
   const config2= {
     ...config,
     data: [data[1]],
     yAxis: {
-      //minLimit: 0,
-      min: -2000000
+      min: -2000000,
+      label: {
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
     },
   }
   const config3= {

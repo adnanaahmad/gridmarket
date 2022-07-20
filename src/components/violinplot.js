@@ -36,7 +36,10 @@ export default function Violinplot() {
     yField: 'y',
     yAxis: {
       minLimit: 0,
-      min: 0
+      min: 0,
+      label: {
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
     }  
   };
 

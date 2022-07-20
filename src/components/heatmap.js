@@ -49,6 +49,17 @@ export default function HeatmapExample() {
         type: 'cat',
       },
     },
+    yAxis: {
+      label: {
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
+    },
+    xAxis: {
+      label: {
+        // 数值格式化为千分位
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
+    },
     tooltip:{
       customContent: (title, items) => {
         const data = items[0]?.data || {};

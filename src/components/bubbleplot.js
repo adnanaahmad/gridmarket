@@ -67,12 +67,18 @@ export default function Bubbleplot () {
           stroke: '#aaa',
         },
       },
+      label: {
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
+      },
     },
     yAxis: {
       line: {
         style: {
           stroke: '#aaa',
         },
+      },
+      label: {
+        formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
       },
     },
   };
