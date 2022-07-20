@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import { Stack } from '@mui/material';
 
 export default function Bubbleplot () {
   const [data, setData] = useState([]);
@@ -80,6 +81,29 @@ export default function Bubbleplot () {
       label: {
         formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
       },
+    },
+    tooltip: {
+      customContent: (title, items) => {
+        const data = items[0]?.data || {};
+        const color = items[0]?.color || '#174c83';
+        //let val = data.solar_gen ?  data.solar_gen.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : data.solar_gen
+        console.log(data, items);
+        return (
+          <Box sx={{paddingX: 1, paddingY: 1.5}}>
+            <Stack spacing={2}>
+              {
+                Object.keys(data).map(node => (
+                  <Stack direction={'row'} spacing={1} alignItems='center'>
+                    <div style={{background: color, height: 10, width: 10, borderRadius: 10}}></div>
+                    <div>{node}: </div>
+                    <div>{data[node] ? data[node].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : data[node]}</div>
+                  </Stack>
+                ))
+              }
+            </Stack>
+          </Box>
+          )
+      }
     },
   };
   return (
