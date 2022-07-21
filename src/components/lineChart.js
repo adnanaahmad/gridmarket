@@ -71,10 +71,7 @@ export default function LineChartExample() {
     if (prev !== next) {
       console.log(prev, next);
       let cdata = originalData.filter(element => element.x <= next && element.x >= prev);
-      setData([]);
-      setTimeout(() => {
-        setData(cdata);
-      }, 300)
+      setData(cdata);
     }
   })(), [valueX]);
   const handleChangeX = (event, val, activeThumb) => {
@@ -185,7 +182,7 @@ export default function LineChartExample() {
     // animation: {
     //   appear: {
     //     animation: 'path-in',
-    //     duration: 500,
+    //     duration: 5000,
     //   },
     // },
   }
