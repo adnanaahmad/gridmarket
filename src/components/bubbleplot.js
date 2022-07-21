@@ -6,13 +6,14 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { Stack } from '@mui/material';
+import { Slider, Stack } from '@mui/material';
 
 export default function Bubbleplot () {
   const [data, setData] = useState([]);
   const [size, setSize] = React.useState('IRR');
   const [x, setX] = React.useState('IRR');
   const [y, setY] = React.useState('Capex_Payback');
+  const [sizeArray, setSizeArray] = React.useState([4,30]);
 
   const handleChangeSize = (event) => {
     setSize(event.target.value);
@@ -25,8 +26,21 @@ export default function Bubbleplot () {
     setY(event.target.value);
   };
 
-  // RR, Capex_Payback, Capex_Asset, NPV_estimated_capex, NPV_estimated_PPA, PPA
-
+  const [pointSize, setPointSize] = React.useState(4);
+  const sizeMap = {
+    1: [2, 10],
+    2: [2.5, 15],
+    3: [3, 20],
+    4: [4, 30]
+  }
+  React.useMemo(() => 
+  (() => {
+    setSizeArray(sizeMap[pointSize]);
+    
+  })(), [pointSize]);
+  const handleChangePointSize = (event, val, activeThumb) => {
+    setPointSize(val);
+  }
 
 
   useEffect(() => {
@@ -49,7 +63,7 @@ export default function Bubbleplot () {
     xField: 'x',
     yField: 'y',
     sizeField: 'size',
-    size: [4, 30],
+    size: sizeArray,
     shape: 'circle',
     pointStyle: {
       fillOpacity: 0.8,
@@ -160,6 +174,16 @@ export default function Bubbleplot () {
               <MenuItem value={'PPA'}>PPA</MenuItem>
             </Select>
           </FormControl>
+          <Slider defaultValue={50} 
+          value={pointSize}
+          onChange={handleChangePointSize}
+          aria-label="Default"
+          valueLabelDisplay="auto"
+          step={1}
+          max={4}
+          min={1}
+          marks
+          />
         </Box>
         <Scatter {...config} />
       </Box>
