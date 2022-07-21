@@ -38,6 +38,7 @@ export default function LineChartExample() {
   const [originalData, setOriginalData] = useState([]);
   const [data, setData] = useState([]);
   const [to, setTo] = useState([]);
+  const [liveGraph, setLiveGraph] = useState(false);
 
   useEffect(() => {
     if(originalData.length) {
@@ -64,6 +65,7 @@ export default function LineChartExample() {
   // })(), [value2]);
   React.useMemo(() => 
   (() => {
+    setLiveGraph(false);
     let next = Math.round((valueX/100)*highestX);
     let prev = 0;
     if (prev !== next) {
@@ -115,6 +117,7 @@ export default function LineChartExample() {
   }, []);
 
   function setChart(hours) {
+    setLiveGraph(false);
     to.forEach(el => {
       window.clearTimeout(el);
     });
@@ -127,6 +130,7 @@ export default function LineChartExample() {
   }
 
   function liveData() {
+    setLiveGraph(true);
     var i = 1;
     let next = 49;
     let prev = 25; 
@@ -155,9 +159,11 @@ export default function LineChartExample() {
     xField: 'x',
     yField: 'y',
     seriesField: 'category',
-    zoom: {
-      position: 'topright',
-    },
+    smooth: true,
+  };
+
+  const config1 = {
+    ...config,
     yAxis: {
       label: {
         formatter: (v) => `${v}`.replace(/\d{1,3}(?=(\d{3})+$)/g, (s) => `${s},`),
@@ -176,14 +182,17 @@ export default function LineChartExample() {
       }),
       title: (v) => v.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
     },
-    smooth: true,
-    animation: {
-      appear: {
-        animation: 'path-in',
-        duration: 500,
-      },
-    },
-  };
+    // animation: {
+    //   appear: {
+    //     animation: 'path-in',
+    //     duration: 500,
+    //   },
+    // },
+  }
+
+  const config2 = {
+    ...config
+  }
 
   return (
     <div style={{direction: 'row', display: 'flex', width: '100%', marginBottom: '100px'}}>
@@ -197,7 +206,14 @@ export default function LineChartExample() {
           <Button onClick={() => setChart(365*24)} variant="outlined">Max</Button>
         </Stack>
         <Box>
-          <Line {...config} />
+          {
+            !liveGraph &&
+            <Line {...config1} />
+          }
+          {
+            liveGraph &&
+            <Line {...config2} />
+          }
         </Box>
         <div style={{marginTop: 2, margin: 'auto', textAlign: 'center'}}>Hour</div>
         <Box sx={{ width: 300 }}>
